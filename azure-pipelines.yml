@@ -15,7 +15,11 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-
+- task: DownloadSecureFile@1
+  displayName: 'Download MomentumInsuranceDev.keystore file'
+  name: keystore
+  inputs:
+    secureFile: 'AppCenterKeyStore.keystore'
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '**/*.sln'
