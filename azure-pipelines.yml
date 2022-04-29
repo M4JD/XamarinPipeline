@@ -20,6 +20,7 @@ steps:
   name: keystore
   inputs:
     secureFile: 'AppCenterKeyStore.keystore'
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '**/*.sln'
@@ -29,3 +30,4 @@ steps:
     projectFile: '**/*droid*.csproj'
     outputDirectory: '$(outputDirectory)/testrepo'
     configuration: '$(buildConfiguration)'
+    msbuildArguments: ' /p:JavaSdkDirectory="$(JAVA_HOME)/" /t:SignAndroidPackage /p:AndroidNdkDirectory="$(androidNdkPath)" /p:AndroidKeyStore="True" /p:AndroidSigningKeyStore="$(keystore.secureFilePath)" /p:AndroidSigningKeyPass="$(KeyPass)" /p:AndroidSigningKeyAlias="$(Alias)" /p:AndroidSigningStorePass="$(KeyPass)"'
